@@ -5,18 +5,42 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-ink: #1b1410;
+  --color-ink: #14100e;
   --color-ink-2: #201812;
   --color-amber: #c97d2c;
   --color-amber-hover: #de9142;
   --color-cream: #f1e7d3;
-  --color-wine: #6e2a2a;
+  --color-wine: #7a2233;
+  --color-wine-hover: #96293e;
   --color-brass: #9c8a5f;
   --color-paper: #efe4cd;
-  --color-line: rgba(241, 231, 211, 0.18);
+  --color-bone: #f4f1ec;
+  --color-line: rgba(20, 16, 14, 0.12);
+  --color-line-dark: rgba(241, 231, 211, 0.18);
   --font-display: "Fraunces", serif;
   --font-sans: "Work Sans", sans-serif;
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal-up { transform: translateY(42px); }
+.reveal-left { transform: translateX(-70px); }
+.reveal-right { transform: translateX(70px); }
+.reveal-pop { transform: scale(0.9); }
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 
 
 /*
