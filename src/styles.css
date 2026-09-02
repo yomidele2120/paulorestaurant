@@ -4,6 +4,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-ink: #1b1410;
+  --color-ink-2: #201812;
+  --color-amber: #c97d2c;
+  --color-amber-hover: #de9142;
+  --color-cream: #f1e7d3;
+  --color-wine: #6e2a2a;
+  --color-brass: #9c8a5f;
+  --color-paper: #efe4cd;
+  --color-line: rgba(241, 231, 211, 0.18);
+  --font-display: "Fraunces", serif;
+  --font-sans: "Work Sans", sans-serif;
+}
+
+
 /*
  * Design system definition.
  *
