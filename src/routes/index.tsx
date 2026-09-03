@@ -5,7 +5,6 @@ import heroBar from "@/assets/hero-bar.jpg";
 import promoClub from "@/assets/promo-club.jpg";
 import promoBrunch from "@/assets/promo-brunch.jpg";
 import visitExterior from "@/assets/visit-exterior.jpg";
-import heroVideo from "@/assets/hero-pour.mp4.asset.json";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
@@ -31,6 +30,7 @@ export const Route = createFileRoute("/")({
 });
 
 const navLinks = [
+  { href: "#pours", label: "Choose Your Pour" },
   { href: "#menu", label: "Menu" },
   { href: "#promos", label: "Happy Hour" },
   { href: "#visit", label: "Visit" },
@@ -70,6 +70,45 @@ const menuRight = [
     name: "Late Night Nachos",
     desc: "Queso, pickled jalapeño, carnitas, all the way loaded.",
     price: "$14",
+  },
+];
+
+const pours = [
+  {
+    name: "Old Fashioned",
+    label: "old fashioned",
+    note: "Bourbon, demerara, orange oil, one big cube.",
+    price: "$13",
+    from: "#3a2415",
+    to: "#0f0a06",
+    garnish: "🍊",
+  },
+  {
+    name: "Smoky Paloma",
+    label: "paloma",
+    note: "Mezcal, grapefruit, lime, a salt rim worth licking.",
+    price: "$12",
+    from: "#7a2233",
+    to: "#2a0e14",
+    garnish: "🍋",
+  },
+  {
+    name: "Espresso Martini",
+    label: "espresso",
+    note: "Vodka, cold brew, cacao bitters, three coffee beans.",
+    price: "$14",
+    from: "#2a1c12",
+    to: "#0c0805",
+    garnish: "☕",
+  },
+  {
+    name: "House Margarita",
+    label: "margarita",
+    note: "Blanco tequila, lime, agave, a wide salted rim.",
+    price: "$12",
+    from: "#2f3b1f",
+    to: "#0d1207",
+    garnish: "🍒",
   },
 ];
 
@@ -195,23 +234,40 @@ function Index() {
         id="top"
         className="relative flex min-h-[88vh] items-end overflow-hidden border-b border-line-dark bg-ink"
       >
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src={heroVideo.url}
-          poster={heroBar}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label="Bartender pouring a cocktail at Paulo Restaurant"
+        <img
+          src={heroBar}
+          alt="Bartender pouring a cocktail at Paulo Restaurant"
+          className="hero-motion-img hero-motion-flicker absolute inset-0 h-full w-full object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="hero-grain pointer-events-none absolute inset-0 opacity-40"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,16,14,0.35)_0%,rgba(20,16,14,0.65)_55%,rgba(20,16,14,0.95)_100%)]" />
+
+        {/* Floating garnish decorations */}
+        <div
+          aria-hidden="true"
+          className="floaty-a pointer-events-none absolute right-[8%] top-[18%] z-[2] text-5xl drop-shadow-lg sm:text-6xl"
+        >
+          🍋
+        </div>
+        <div
+          aria-hidden="true"
+          className="floaty-b pointer-events-none absolute right-[22%] top-[38%] z-[2] hidden text-4xl drop-shadow-lg sm:block"
+        >
+          🍒
+        </div>
+        <div
+          aria-hidden="true"
+          className="floaty-c pointer-events-none absolute right-[4%] top-[52%] z-[2] hidden text-3xl drop-shadow-lg md:block"
+        >
+          🫒
+        </div>
+
         <div className="relative z-[2] mx-auto w-full max-w-[1120px] px-6 pb-16 pt-24 sm:px-8 sm:pb-20">
           <Reveal variant="pop">
-            <div className="mb-4 font-display text-[0.95rem] italic text-amber">
-              A neighborhood bar &amp; kitchen, since 2014
-            </div>
+            <span className="pill-badge mb-4">🍸 A neighborhood bar &amp; kitchen, since 2014</span>
           </Reveal>
           <Reveal variant="left" delay={80}>
             <h1 className="mb-5 max-w-[14ch] font-display text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1.02] tracking-[-0.01em] text-paper">
@@ -276,6 +332,41 @@ function Index() {
               href="#menu"
             />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Manifesto */}
+      <section className="overflow-hidden bg-bone py-20 sm:py-24">
+        <div className="mx-auto max-w-[1120px] px-6 sm:px-8">
+          <Reveal variant="pop">
+            <p className="relative mx-auto max-w-[22ch] text-center font-display text-[clamp(2.1rem,6vw,4.2rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ink">
+              We don&apos;t pour apologies.
+              <img
+                src={promoClub}
+                alt=""
+                aria-hidden="true"
+                className="mx-3 -my-2 inline-block h-14 w-14 rotate-3 rounded-sm object-cover align-middle shadow-lg sm:h-20 sm:w-20"
+              />
+              We pour honest drinks, loud nights and second rounds.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Choose your pour */}
+      <section id="pours" className="py-20 sm:py-24">
+        <div className="mx-auto max-w-[1120px] px-6 sm:px-8">
+          <SectionHead
+            title="Choose your pour"
+            copy="Four house favorites. Pick a mood, we'll pick the glass."
+          />
+        </div>
+        <div className="grid gap-0.5 bg-line sm:grid-cols-2">
+          {pours.map((p, i) => (
+            <Reveal key={p.name} variant={i % 2 === 0 ? "left" : "right"} delay={i * 90}>
+              <PourCard {...p} />
+            </Reveal>
+          ))}
         </div>
       </section>
 
@@ -507,6 +598,48 @@ function PromoCard({
         <a href={href} className="self-start border-b border-amber pb-0.5 font-semibold text-amber">
           {link}
         </a>
+      </div>
+    </div>
+  );
+}
+
+function PourCard({
+  name,
+  label,
+  note,
+  price,
+  from,
+  to,
+  garnish,
+}: {
+  name: string;
+  label: string;
+  note: string;
+  price: string;
+  from: string;
+  to: string;
+  garnish: string;
+}) {
+  return (
+    <div
+      className="relative flex min-h-[320px] flex-col justify-end overflow-hidden px-8 py-12 sm:px-12"
+      style={{ background: `radial-gradient(circle at 30% 20%, ${from}, ${to} 75%)` }}
+    >
+      <span aria-hidden="true" className="pour-label">
+        {label}
+      </span>
+      <span
+        aria-hidden="true"
+        className="floaty-c pointer-events-none absolute right-8 top-8 text-4xl sm:text-5xl"
+      >
+        {garnish}
+      </span>
+      <div className="relative z-[2]">
+        <h3 className="mb-2 font-display text-[1.5rem] font-semibold text-paper sm:text-[1.7rem]">
+          {name}
+        </h3>
+        <p className="mb-5 max-w-[32ch] text-[0.95rem] text-cream/75">{note}</p>
+        <span className="pill-badge bg-transparent">{price} · add to tab</span>
       </div>
     </div>
   );
